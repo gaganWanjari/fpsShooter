@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>3D Experience</title>
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+
+    <div id="hud">
+      <div class="stat">
+        <span class="stat-icon">♥</span>
+        <div class="stat-body">
+          <div class="stat-label">Health</div>
+          <div class="stat-value" id="healthVal">100</div>
+          <div class="bar"><div class="bar-fill health" id="healthBar"></div></div>
+        </div>
+      </div>
+      <div class="stat">
+        <span class="stat-icon">⚑</span>
+        <div class="stat-body">
+          <div class="stat-label">Wave</div>
+          <div class="stat-value" id="wave">1 / 8</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="scoreboard">
+      <div class="score-label">SCORE</div>
+      <div class="score-value" id="score">0</div>
+    </div>
+    <div id="combo"></div>
+
+    <div id="ammo"><b>12</b> / 48</div>
+
+    <div id="fps">FPS --</div>
+
+    <div id="crosshair"><span></span><span></span></div>
+
+    <div id="damage"></div>
+
+    <div id="hint"><b>Click</b> to play &nbsp;·&nbsp; <b>Mouse</b> look &nbsp;·&nbsp; <b>WASD</b> move &nbsp;·&nbsp; <b>Click</b> shoot &nbsp;·&nbsp; <b>R</b> reload &nbsp;·&nbsp; <b>Right-click</b> aim</div>
+
+    <div id="vignette"></div>
+
+    <!-- Touch controls (shown on touch / coarse-pointer devices) -->
+    <div id="touch">
+      <div id="joystick"><div id="stick"></div></div>
+      <button id="reloadBtn" aria-label="Reload">Reload</button>
+      <button id="aimBtn" aria-label="Aim">Aim</button>
+      <button id="jumpBtn" aria-label="Jump">Jump</button>
+    </div>
+
+    <div id="overlay">
+      <div class="panel">
+        <div class="badge">3D Playground</div>
+        <h2>Enemy Hunt</h2>
+        <p>Survive 8 waves of homing enemies. Watch for fast <b>runners</b> and tanky <b>brutes</b>. Chain kills for a score multiplier, keep your health up, and aim down sights for the tricky shots.</p>
+        <button id="startBtn">Start Game</button>
+      </div>
+    </div>
+
+    <div id="endOverlay" class="hidden">
+      <div class="panel">
+        <h2 id="endTitle">Game Over</h2>
+        <p id="endMessage"></p>
+        <button id="restartBtn">Play Again</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

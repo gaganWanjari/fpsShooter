@@ -14,6 +14,10 @@ export class Input {
   private locked = false;
   private firing = false; // left button held
   private aiming = false; // right button held
+  private triggerEdge = false; // left button just pressed (for semi-auto)
+
+  // Weapon selection request ('rifle' | 'sniper' | 'toggle'), consumed once.
+  private weaponRequest: 'rifle' | 'sniper' | 'toggle' | null = null;
 
   // Touch look-drag state (used only when not pointer-locked).
   private dragging = false;
@@ -48,6 +52,7 @@ export class Input {
     document.addEventListener('mousemove', this.onMouseMove);
     canvas.addEventListener('mousedown', this.onMouseDown);
     window.addEventListener('mouseup', this.onMouseUp);
+    window.addEventListener('wheel', this.onWheel, { passive: true });
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
 
     // Touch / non-locked drag look.
@@ -102,8 +107,17 @@ export class Input {
 
   // --- Keyboard ---------------------------------------------------------
 
-  private onKeyDown = (e: KeyboardEvent) => this.keys.add(e.code);
+  private onKeyDown = (e: KeyboardEvent) => {
+    this.keys.add(e.code);
+    if (e.code === 'Digit1') this.weaponRequest = 'rifle';
+    else if (e.code === 'Digit2') this.weaponRequest = 'sniper';
+    else if (e.code === 'KeyQ') this.weaponRequest = 'toggle';
+  };
   private onKeyUp = (e: KeyboardEvent) => this.keys.delete(e.code);
+
+  private onWheel = () => {
+    this.weaponRequest = 'toggle';
+  };
 
   // --- Pointer lock mouse look ------------------------------------------
 
@@ -127,8 +141,10 @@ export class Input {
       this.requestLock();
       return;
     }
-    if (e.button === 0) this.firing = true;
-    else if (e.button === 2) this.aiming = true;
+    if (e.button === 0) {
+      this.firing = true;
+      this.triggerEdge = true;
+    } else if (e.button === 2) this.aiming = true;
   };
 
   private onMouseUp = (e: MouseEvent) => {
@@ -261,6 +277,22 @@ export class Input {
     return this.firing;
   }
 
+  /** Returns true once when the trigger is freshly pulled (semi-auto). */
+  consumeTriggerEdge(): boolean {
+    if (this.triggerEdge) {
+      this.triggerEdge = false;
+      return true;
+    }
+    return false;
+  }
+
+  /** Pending weapon-switch request, consumed once ('rifle'|'sniper'|'toggle'). */
+  consumeWeaponRequest(): 'rifle' | 'sniper' | 'toggle' | null {
+    const r = this.weaponRequest;
+    this.weaponRequest = null;
+    return r;
+  }
+
   /** True while aiming down sights (right mouse or touch aim button). */
   isAiming(): boolean {
     return this.aiming || this.touchAim;
@@ -286,6 +318,7 @@ export class Input {
     document.removeEventListener('mousemove', this.onMouseMove);
     this.canvas.removeEventListener('mousedown', this.onMouseDown);
     window.removeEventListener('mouseup', this.onMouseUp);
+    window.removeEventListener('wheel', this.onWheel);
     this.canvas.removeEventListener('pointerdown', this.onPointerDown);
     window.removeEventListener('pointerup', this.onPointerUp);
     window.removeEventListener('pointermove', this.onPointerMove);

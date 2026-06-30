@@ -546,3 +546,176 @@ button:hover {
 button:active {
   transform: translateY(0);
 }
+
+/* --- Objective banner (top centre, under the score) --- */
+#objectiveBar {
+  position: fixed;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(8, 14, 28, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 4;
+}
+
+#alert {
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: rgba(53, 208, 127, 0.18);
+  color: #6ee0a0;
+  border: 1px solid rgba(53, 208, 127, 0.45);
+}
+
+#alert.hot {
+  background: rgba(255, 70, 70, 0.2);
+  color: #ff7a7a;
+  border-color: rgba(255, 70, 70, 0.55);
+  animation: alertPulse 0.8s ease-in-out infinite;
+}
+
+@keyframes alertPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+#guards.clear {
+  color: #6ee0a0;
+}
+
+/* --- Weapon indicator (bottom-right, above the ammo) --- */
+#weapon {
+  position: fixed;
+  right: 22px;
+  bottom: 96px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  border-radius: 12px;
+  background: rgba(8, 14, 28, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  color: #dfe9ff;
+  pointer-events: none;
+  user-select: none;
+  z-index: 4;
+}
+
+#weapon.stealth {
+  color: #9fe3c0;
+  border-color: rgba(53, 208, 127, 0.4);
+}
+
+#weapon .wkey {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+/* --- Capture progress (bottom centre) --- */
+#capture {
+  position: fixed;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  z-index: 4;
+  transition: opacity 0.25s ease;
+}
+
+#capture.hidden {
+  opacity: 0;
+}
+
+.cap-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #6ee0a0;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.cap-bar {
+  height: 10px;
+  border-radius: 6px;
+  background: rgba(8, 14, 28, 0.6);
+  border: 1px solid rgba(110, 224, 160, 0.4);
+  overflow: hidden;
+}
+
+.cap-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #6ee07a, #2bb673);
+  transition: width 0.1s linear;
+}
+
+/* --- Sniper scope overlay --- */
+#scope {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+  /* Black vignette mask leaving a circular sight in the centre. */
+  background:
+    radial-gradient(circle at center, transparent 0 28vh, rgba(0, 0, 0, 0.96) 28.6vh 200vh);
+}
+
+#scope.on {
+  opacity: 1;
+}
+
+/* Cross-hair lines + ranging marks inside the scope. */
+#scope::before,
+#scope::after {
+  content: "";
+  position: absolute;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+#scope::before {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 9999px transparent;
+}
+
+#scope::after {
+  left: 50%;
+  top: 0;
+  height: 100%;
+  width: 1.5px;
+  transform: translateX(-50%);
+}

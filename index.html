@@ -18,12 +18,17 @@
         </div>
       </div>
       <div class="stat">
-        <span class="stat-icon">⚑</span>
+        <span class="stat-icon">☠</span>
         <div class="stat-body">
-          <div class="stat-label">Wave</div>
-          <div class="stat-value" id="wave">1 / 8</div>
+          <div class="stat-label">Guards</div>
+          <div class="stat-value" id="guards">0 / 0</div>
         </div>
       </div>
+    </div>
+
+    <div id="objectiveBar">
+      <span id="alert" class="hot">HIDDEN</span>
+      <span id="objective">Eliminate the guards</span>
     </div>
 
     <div id="scoreboard">
@@ -32,15 +37,23 @@
     </div>
     <div id="combo"></div>
 
-    <div id="ammo"><b>12</b> / 48</div>
+    <div id="ammo"><b>5</b> / 25</div>
+    <div id="weapon" class="stealth"><span class="wkey">2</span> Sniper Rifle</div>
+
+    <div id="capture" class="hidden">
+      <div class="cap-label">CAPTURING CAMP</div>
+      <div class="cap-bar"><div class="cap-fill" id="captureBar"></div></div>
+    </div>
 
     <div id="fps">FPS --</div>
 
     <div id="crosshair"><span></span><span></span></div>
 
+    <div id="scope"></div>
+
     <div id="damage"></div>
 
-    <div id="hint"><b>Click</b> to play &nbsp;·&nbsp; <b>Mouse</b> look &nbsp;·&nbsp; <b>WASD</b> move &nbsp;·&nbsp; <b>Click</b> shoot &nbsp;·&nbsp; <b>R</b> reload &nbsp;·&nbsp; <b>Right-click</b> aim</div>
+    <div id="hint"><b>WASD</b> move &nbsp;·&nbsp; <b>Mouse</b> look &nbsp;·&nbsp; <b>Click</b> shoot &nbsp;·&nbsp; <b>RMB</b> aim &nbsp;·&nbsp; <b>1</b> rifle / <b>2</b> sniper &nbsp;·&nbsp; <b>R</b> reload</div>
 
     <div id="vignette"></div>
 
@@ -54,10 +67,10 @@
 
     <div id="overlay">
       <div class="panel">
-        <div class="badge">3D Playground</div>
-        <h2>Enemy Hunt</h2>
-        <p>Survive 8 waves of homing enemies. Watch for fast <b>runners</b> and tanky <b>brutes</b>. Chain kills for a score multiplier, keep your health up, and aim down sights for the tricky shots.</p>
-        <button id="startBtn">Start Game</button>
+        <div class="badge">Special Operation</div>
+        <h2>Camp Raid</h2>
+        <p>Infiltrate the fortified enemy camp. Go loud with the <b>assault rifle</b>, or stay a ghost with the silent <b>sniper rifle</b> (press <b>1</b>/<b>2</b> to switch). Drop every guard, then stand on the central flag to <b>capture the camp</b>. Fire loudly and the whole camp will hunt you down.</p>
+        <button id="startBtn">Begin Raid</button>
       </div>
     </div>
 

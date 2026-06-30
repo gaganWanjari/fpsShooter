@@ -64,6 +64,29 @@ export class GameAudio {
     this.tone(700, 0.07, 'square', 0.3, 180);
   }
 
+  /** Heavy, punchy bolt-action sniper crack. */
+  sniper() {
+    this.tone(900, 0.05, 'square', 0.4, 220);
+    this.tone(140, 0.28, 'sawtooth', 0.5, 50);
+  }
+
+  /** A guard's return fire (drier, quieter than the player's gun). */
+  enemyShot() {
+    this.tone(520, 0.06, 'square', 0.18, 150);
+  }
+
+  /** Swapping between weapons. */
+  swap() {
+    this.tone(300, 0.05, 'square', 0.3, 520);
+    setTimeout(() => this.tone(560, 0.06, 'square', 0.25, 380), 70);
+  }
+
+  /** The camp spots you — an urgent two-tone alarm. */
+  alarm() {
+    this.tone(740, 0.18, 'square', 0.45);
+    setTimeout(() => this.tone(560, 0.22, 'square', 0.45), 180);
+  }
+
   kill() {
     this.tone(200, 0.22, 'sawtooth', 0.5, 50);
     this.tone(90, 0.3, 'square', 0.3, 40);

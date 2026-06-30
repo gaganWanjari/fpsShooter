@@ -123,8 +123,8 @@ export class Player {
       this.onGround = true;
     }
 
-    // Keep the player inside the arena.
-    const limit = 24;
+    // Keep the player inside the playable field.
+    const limit = 78;
     this.mesh.position.x = THREE.MathUtils.clamp(this.mesh.position.x, -limit, limit);
     this.mesh.position.z = THREE.MathUtils.clamp(this.mesh.position.z, -limit, limit);
 
